@@ -23,7 +23,7 @@ impl Node {
 		let mut hasher = Sha256::new();
 		
 		// TODO: Add some random bytes to the hasher input.
-		hasher.input_str(&((time::get_time().nsec as i64).to_string() + val + &format!("{:?}", NodeE::Start)));
+		hasher.input_str(&((time::get_time().nsec as i64).to_string() + val));
 		
 		Box::new(Node{
 			hash: hasher.result_str(),
@@ -37,7 +37,7 @@ impl Node {
 		n.parent = NodeE::Parent(Box::new(self.clone()));
 		
 		let mut hasher = Sha256::new();
-		hasher.input_str(&format!("{:?}", self));
+		hasher.input_str(&format!("{}{}", self.hash, self.value));
 		n.hash = hasher.result_str();
 		
 		n
@@ -67,7 +67,7 @@ impl Node {
 			
 			match n.parent.clone() {
 				NodeE::Parent(p) => {
-					hasher.input_str(&format!("{:?}", p.clone()));
+					hasher.input_str(&format!("{}{}", p.clone().hash, p.clone().value));
 					if hasher.result_str() != n.hash {
 						println!("Error: Blockchain failed verification at block {}: {:?}", p.clone().height(), p.clone());
 						res = false;
