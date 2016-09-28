@@ -11,9 +11,9 @@ pub enum NodeE {
 
 #[derive(Debug, Clone)]
 pub struct Node {
-    hash: String,
-    value: String,
-    parent: NodeE,
+    pub hash: String,
+    pub value: String,
+    pub parent: NodeE,
 }
 
 impl Node {
