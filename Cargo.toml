@@ -1,0 +1,8 @@
+[package]
+name = "blockchain"
+version = "0.1.0"
+authors = ["Jeremy Carter <Jeremy@JeremyCarter.ca>"]
+
+[dependencies]
+rust-crypto = "^0.2"
+time = "0.1"
